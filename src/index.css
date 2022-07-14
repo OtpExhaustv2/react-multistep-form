@@ -1,0 +1,135 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    height: 100vh;
+}
+
+.step {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+}
+
+label {
+    font-size: 1.25rem;
+    display: inline-block;
+    color: #ccc;
+    transition: all .3s ease-in-out;
+}
+
+input {
+    display: block;
+    padding: .5rem;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    transition: all .3s ease-in-out;
+}
+
+input:focus + label {
+    color: #000;
+}
+
+input:focus, input:active {
+    border-bottom: 1px solid #000;
+}
+
+.fade-in {
+    animation: fade-in .5s ease-in-out both;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.stepper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.stepper__indicator {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.stepper__step {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stepper__step.active .stepper__circle {
+    background-color: aquamarine;
+    color: white;
+}
+
+.stepper__step.active .stepper__circle + span {
+    color: aquamarine;
+}
+
+.stepper__circle {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s ease-in-out;
+}
+
+.stepper__circle + span {
+    font-size: 1.25rem;
+    color: #ccc;
+    transition: all .3s ease-in-out;
+}
+
+button {
+    padding: .75rem;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    background-color: aquamarine;
+    color: #fff;
+    text-transform: uppercase;
+    transition: all .3s ease-in-out;
+}
+
+button:hover {
+    background-color: #00bcd4;
+}
