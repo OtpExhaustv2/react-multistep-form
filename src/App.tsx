@@ -1,38 +1,30 @@
-import MultiStepForm from "./lib/MultiStepForm";
-import PersonalInfo from "./components/PersonalInfo";
-import { Data } from "./lib/types";
-import React from "react";
-import DetailedInfo from "./components/DetailedInfo";
+import DetailedInfo from './components/DetailedInfo';
+import PersonalInfo from './components/PersonalInfo';
+import MultiStepForm from './lib/MultiStepForm';
 
 const App = () => {
-  return (
-    <div className="container">
-      <MultiStepForm<Data>
-        initialData={{ firstName: "", lastName: "", email: "", password: "" }}
-        steps={[
-          {
-            title: "Step 1",
-            render: (data, onChange) => (
-              <PersonalInfo onChange={onChange} data={data} />
-            ),
-          },
-          {
-            title: "Step 2",
-            render: (data, onChange) => (
-              <DetailedInfo onChange={onChange} data={data} />
-            ),
-          },
-          {
-            title: "Step 3",
-            render: (data, onChange) => (
-              <DetailedInfo onChange={onChange} data={data} />
-            ),
-          },
-        ]}
-        onSubmit={(data) => console.log(data)}
-      />
-    </div>
-  );
+	return (
+		<div className='container'>
+			<MultiStepForm
+				initialData={{ firstName: '', lastName: '', email: '', password: '' }}
+				steps={[
+					{
+						title: 'Step 1',
+						render: () => <PersonalInfo />,
+					},
+					{
+						title: 'Step 2',
+						render: () => <DetailedInfo />,
+					},
+					{
+						title: 'Step 3',
+						render: () => <DetailedInfo />,
+					},
+				]}
+				onSubmit={(data) => console.log(data)}
+			/>
+		</div>
+	);
 };
 
 export default App;
