@@ -6,11 +6,12 @@ declare global {
 			title: string;
 			component: React.FC;
 			disabled?: (data: T, index: number) => boolean;
-			initialData?: T;
 		};
 
 		type RegisterConfig<T> = {
-			derivedValue: (value: InputValue) => InputValue;
+			derivedValue?: (value: InputValue) => InputValue;
+			id?: string;
+			name?: string;
 		};
 
 		type InputValue = string | ReadonlyArray<string> | number | undefined;

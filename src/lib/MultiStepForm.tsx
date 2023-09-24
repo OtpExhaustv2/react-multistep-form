@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { MultiStepFormContext } from './MultiStepFormContext';
 import Stepper from './Stepper';
 
@@ -18,24 +18,18 @@ const MultiStepForm = <T extends {}>({
 	const [data, setData] = React.useState<T>(initialData);
 	const [currentStep, setCurrentStep] = React.useState(0);
 
-	const handleOnChange = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			const { name, value } = e.target;
-			setData((prevData) => ({ ...prevData, [name]: value }));
-		},
-		[data]
-	);
+	const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setData((prevData) => ({ ...prevData, [name]: value }));
+	};
 
-	const handleNextOrSubmit = useCallback(
-		(e: React.FormEvent) => {
-			if (currentStep === steps.length - 1) {
-				e.preventDefault();
-				return onSubmit(data);
-			}
-			setCurrentStep((prev) => prev + 1);
-		},
-		[currentStep, data]
-	);
+	const handleNextOrSubmit = (e: React.FormEvent) => {
+		if (currentStep === steps.length - 1) {
+			e.preventDefault();
+			return onSubmit(data);
+		}
+		setCurrentStep((prev) => prev + 1);
+	};
 
 	return (
 		<div>
@@ -60,9 +54,12 @@ const MultiStepForm = <T extends {}>({
 							? config.derivedValue(initialValue)
 							: initialValue;
 
+						const id = config?.id || (fieldName as string);
+						const name = config?.name || (fieldName as string);
+
 						return {
-							id: fieldName as string,
-							name: fieldName as string,
+							id,
+							name,
 							value,
 							onChange: handleOnChange,
 						};

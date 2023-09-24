@@ -5,7 +5,7 @@ import { useMultiStepFormContext } from '../lib/MultiStepFormContext';
 type PersonalInfosProps = {};
 
 const PersonalInfo: React.FC<PersonalInfosProps> = () => {
-	const { register, updateField } = useMultiStepFormContext<Data>();
+	const { register, updateField, resetForm } = useMultiStepFormContext<Data>();
 
 	const derivedFirstName = (value: MultiStepForm.InputValue) => {
 		if (value === 'Jonh') {
@@ -34,10 +34,16 @@ const PersonalInfo: React.FC<PersonalInfosProps> = () => {
 				onClick={() => updateField('password', '')}
 				style={{
 					marginTop: '10px',
-					display: 'flex',
-					gap: '10px',
 				}}>
 				Update field from another step
+			</button>
+			<button
+				type='button'
+				style={{
+					marginTop: '10px',
+				}}
+				onClick={resetForm}>
+				Reset form
 			</button>
 		</>
 	);
