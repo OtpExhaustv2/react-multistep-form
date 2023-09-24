@@ -3,6 +3,9 @@ import PersonalInfo from './components/PersonalInfo';
 import MultiStepForm from './lib/MultiStepForm';
 
 const App = () => {
+	const a = {
+		t: PersonalInfo,
+	};
 	return (
 		<div className='container'>
 			<MultiStepForm
@@ -10,15 +13,16 @@ const App = () => {
 				steps={[
 					{
 						title: 'Step 1',
-						render: () => <PersonalInfo />,
+						component: PersonalInfo,
 					},
 					{
 						title: 'Step 2',
-						render: () => <DetailedInfo />,
+						component: DetailedInfo,
+						disabled: (data) => !data.firstName || !data.lastName,
 					},
 					{
 						title: 'Step 3',
-						render: () => <DetailedInfo />,
+						component: DetailedInfo,
 					},
 				]}
 				onSubmit={(data) => console.log(data)}

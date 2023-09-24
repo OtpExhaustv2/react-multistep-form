@@ -5,28 +5,16 @@ import { Data } from '../lib/types';
 type DetailedInfoProps = {};
 
 const DetailedInfo: React.FC<DetailedInfoProps> = () => {
-	const { data, onChange } = useMultiStepFormContext<Data>();
+	const { register } = useMultiStepFormContext<Data>();
 	return (
 		<>
 			<div className='form-group'>
-				<input
-					type='text'
-					id='email'
-					name='email'
-					onChange={onChange}
-					value={data.email}
-				/>
+				<input type='text' {...register('email')} />
 				<label htmlFor='email'>Email</label>
 			</div>
 			<div className='form-group'>
-				<input
-					type='password'
-					id='password'
-					name='password'
-					onChange={onChange}
-					value={data.password}
-				/>
-				<label htmlFor='email'>Password</label>
+				<input type='password' {...register('password')} />
+				<label htmlFor='password'>Password</label>
 			</div>
 		</>
 	);

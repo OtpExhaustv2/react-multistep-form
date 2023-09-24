@@ -40,24 +40,28 @@ const MultiStepForm = <T extends {}>({
 
 	return (
 		<div>
-			<form>
-				<div className='stepper'>
-					{showStepper && (
-						<Stepper
-							currentStep={currentStep}
-							steps={steps.map((step) => step.title)}
-						/>
-					)}
-				</div>
-				<div className='stepper__indicator'>
-					{currentStep + 1}/{steps.length}
-				</div>
-				<MultiStepFormContext.Provider
-					value={{
+			<MultiStepFormContext.Provider
+				value={{
+					onChange: handleOnChange,
+					data,
+					currentStep,
+					setCurrentStep,
+					register: (fieldName: keyof T) => ({
+						id: fieldName as string,
+						name: fieldName as string,
+						value: data[fieldName],
 						onChange: handleOnChange,
-						data,
-					}}>
+					}),
+				}}>
+				<form>
+					<div className='stepper'>
+						{showStepper && <Stepper steps={steps} />}
+					</div>
+					<div className='stepper__indicator'>
+						{currentStep + 1}/{steps.length}
+					</div>
 					{steps.map((step, index) => {
+						const StepComponent = step.component;
 						if (currentStep === index) {
 							return (
 								<div key={index} className='step fade-in'>
@@ -67,7 +71,7 @@ const MultiStepForm = <T extends {}>({
 										}}>
 										{step.title}
 									</h1>
-									{step.render(data, handleOnChange)}
+									<StepComponent />
 									<div
 										style={{
 											marginTop: '10px',
@@ -88,8 +92,8 @@ const MultiStepForm = <T extends {}>({
 							);
 						}
 					})}
-				</MultiStepFormContext.Provider>
-			</form>
+				</form>
+			</MultiStepFormContext.Provider>
 		</div>
 	);
 };

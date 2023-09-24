@@ -1,24 +1,18 @@
-import React from "react";
+import Step from './Step';
+import { FormStep } from './types';
 
-type StepperProps = {
-  currentStep: number;
-  steps: string[];
+type StepperProps<T> = {
+	steps: FormStep<T>[];
 };
 
-const Stepper: React.FC<StepperProps> = ({ currentStep, steps }) => {
-  return (
-    <div className="stepper">
-      {steps.map((step, index) => (
-        <div
-          key={index}
-          className={`stepper__step ${currentStep === index && "active"}`}
-        >
-          <span className="stepper__circle">{index + 1}</span>
-          <span>{step}</span>
-        </div>
-      ))}
-    </div>
-  );
+const Stepper = <T extends {}>({ steps }: StepperProps<T>) => {
+	return (
+		<div className='stepper'>
+			{steps.map((step, index) => (
+				<Step<T> key={index} step={step} index={index} />
+			))}
+		</div>
+	);
 };
 
 export default Stepper;
