@@ -2,10 +2,14 @@ import DetailedInfo from './components/DetailedInfo';
 import PersonalInfo from './components/PersonalInfo';
 import MultiStepForm from './lib/MultiStepForm';
 
+export type Data = {
+	firstName: string;
+	lastName: string;
+	email: string;
+	password: string;
+};
+
 const App = () => {
-	const a = {
-		t: PersonalInfo,
-	};
 	return (
 		<div className='container'>
 			<MultiStepForm

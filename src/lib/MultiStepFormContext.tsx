@@ -1,13 +1,20 @@
 import { createContext, useContext } from 'react';
 
 export type MultiStepFormContextType<T = unknown> = {
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	updateField: (
+		fieldName: keyof T,
+		value: string | ReadonlyArray<string> | number | undefined
+	) => void;
 	data: T;
 	currentStep: number;
 	setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-	register: (fieldName: keyof T) => {
+	resetForm: () => void;
+	register: (
+		fieldName: keyof T,
+		config?: MultiStepForm.RegisterConfig<T>
+	) => {
 		onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-		value: any;
+		value: string | ReadonlyArray<string> | number | undefined;
 		id: string;
 		name: string;
 	};

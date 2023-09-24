@@ -1,14 +1,18 @@
 import React from 'react';
 
-export type FormStep<T> = {
-	title: string;
-	component: React.FC;
-	disabled?: (data: T, index: number) => boolean;
-};
+declare global {
+	declare module MultiStepForm {
+		type FormStep<T> = {
+			title: string;
+			component: React.FC;
+			disabled?: (data: T, index: number) => boolean;
+			initialData?: T;
+		};
 
-export type Data = {
-	firstName: string;
-	lastName: string;
-	email: string;
-	password: string;
-};
+		type RegisterConfig<T> = {
+			derivedValue: (value: InputValue) => InputValue;
+		};
+
+		type InputValue = string | ReadonlyArray<string> | number | undefined;
+	}
+}

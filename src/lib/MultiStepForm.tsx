@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
 import { MultiStepFormContext } from './MultiStepFormContext';
 import Stepper from './Stepper';
-import { FormStep } from './types';
 
 type MultiStepFormProps<T> = {
-	steps: FormStep<T>[];
+	steps: MultiStepForm.FormStep<T>[];
 	onSubmit: (data: T) => void;
 	initialData: T;
 	showStepper?: boolean;
@@ -42,16 +41,32 @@ const MultiStepForm = <T extends {}>({
 		<div>
 			<MultiStepFormContext.Provider
 				value={{
-					onChange: handleOnChange,
+					updateField: (fieldName, value) => {
+						setData((prevData) => ({ ...prevData, [fieldName]: value }));
+					},
 					data,
 					currentStep,
 					setCurrentStep,
-					register: (fieldName: keyof T) => ({
-						id: fieldName as string,
-						name: fieldName as string,
-						value: data[fieldName],
-						onChange: handleOnChange,
-					}),
+					resetForm: () => {
+						setData(initialData);
+						setCurrentStep(0);
+					},
+					register: (
+						fieldName: keyof T,
+						config?: MultiStepForm.RegisterConfig<T>
+					) => {
+						const initialValue = data[fieldName] as MultiStepForm.InputValue;
+						const value = config?.derivedValue
+							? config.derivedValue(initialValue)
+							: initialValue;
+
+						return {
+							id: fieldName as string,
+							name: fieldName as string,
+							value,
+							onChange: handleOnChange,
+						};
+					},
 				}}>
 				<form>
 					<div className='stepper'>

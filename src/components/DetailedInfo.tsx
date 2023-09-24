@@ -1,6 +1,6 @@
 import React from 'react';
+import { Data } from '../App';
 import { useMultiStepFormContext } from '../lib/MultiStepFormContext';
-import { Data } from '../lib/types';
 
 type DetailedInfoProps = {};
 
