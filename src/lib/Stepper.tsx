@@ -1,8 +1,7 @@
 import Step from './Step';
-import { FormStep } from './types';
 
 type StepperProps<T> = {
-	steps: FormStep<T>[];
+	steps: MultiStepForm.TFormStep<T>[];
 };
 
 const Stepper = <T extends {}>({ steps }: StepperProps<T>) => {

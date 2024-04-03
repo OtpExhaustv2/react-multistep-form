@@ -2,14 +2,14 @@ import React from 'react';
 import { MultiStepFormContext } from './MultiStepFormContext';
 import Stepper from './Stepper';
 
-type MultiStepFormProps<T> = {
-	steps: MultiStepForm.FormStep<T>[];
+type MultiStepFormProps<T extends MultiStepForm.TData> = {
+	steps: MultiStepForm.TFormStep<T>[];
 	onSubmit: (data: T) => void;
 	initialData: T;
 	showStepper?: boolean;
 };
 
-const MultiStepForm = <T extends {}>({
+const MultiStepForm = <T extends MultiStepForm.TData>({
 	steps,
 	onSubmit,
 	initialData,
@@ -47,9 +47,9 @@ const MultiStepForm = <T extends {}>({
 					},
 					register: (
 						fieldName: keyof T,
-						config?: MultiStepForm.RegisterConfig<T>
+						config?: MultiStepForm.TRegisterConfig
 					) => {
-						const initialValue = data[fieldName] as MultiStepForm.InputValue;
+						const initialValue = data[fieldName];
 						const value = config?.derivedValue
 							? config.derivedValue(initialValue)
 							: initialValue;

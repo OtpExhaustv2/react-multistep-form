@@ -1,8 +1,7 @@
 import { useMultiStepFormContext } from './MultiStepFormContext';
-import { FormStep } from './types';
 
 interface StepProps<T> {
-	step: FormStep<T>;
+	step: MultiStepForm.TFormStep<T>;
 	index: number;
 }
 

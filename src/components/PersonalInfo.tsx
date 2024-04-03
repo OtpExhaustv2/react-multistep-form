@@ -7,7 +7,7 @@ type PersonalInfosProps = {};
 const PersonalInfo: React.FC<PersonalInfosProps> = () => {
 	const { register, updateField, resetForm } = useMultiStepFormContext<Data>();
 
-	const derivedFirstName = (value: MultiStepForm.InputValue) => {
+	const derivedFirstName = (value: string) => {
 		if (value === 'Jonh') {
 			return 'John';
 		}
@@ -17,12 +17,7 @@ const PersonalInfo: React.FC<PersonalInfosProps> = () => {
 	return (
 		<>
 			<div className='form-group'>
-				<input
-					type='text'
-					{...register('firstName', {
-						derivedValue: derivedFirstName,
-					})}
-				/>
+				<input type='text' {...register('password', {})} />
 				<label htmlFor='firstName'>Firstname</label>
 			</div>
 			<div className='form-group'>
