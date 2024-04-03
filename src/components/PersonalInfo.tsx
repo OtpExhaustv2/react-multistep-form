@@ -17,7 +17,7 @@ const PersonalInfo: React.FC<PersonalInfosProps> = () => {
 	return (
 		<>
 			<div className='form-group'>
-				<input type='text' {...register('password', {})} />
+				<input type='text' {...register('firstName')} />
 				<label htmlFor='firstName'>Firstname</label>
 			</div>
 			<div className='form-group'>
