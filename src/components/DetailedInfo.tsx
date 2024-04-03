@@ -13,7 +13,11 @@ const DetailedInfo: React.FC<DetailedInfoProps> = () => {
 				<label htmlFor='email'>Email</label>
 			</div>
 			<div className='form-group'>
-				<input type='password' {...register('password')} />
+				<input
+					type='password'
+					{...register('password')}
+					autoComplete='current-password'
+				/>
 				<label htmlFor='password'>Password</label>
 			</div>
 		</>
